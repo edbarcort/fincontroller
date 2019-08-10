@@ -22,11 +22,14 @@ onChangeHandler=event=>{
 
 onClickHandler = () => {
     const data = new FormData()
-    data.append('file', this.state.selectedFile)
+    data.append('file', this.state.file)
   axios.post("http://localhost:3000/upload", data, { // receive two parameter endpoint url ,form data 
-  })}
 
-
+})
+    .then(res => { // then print response status
+      console.log(res.statusText)
+    })
+}
 
 render() {
   return (
