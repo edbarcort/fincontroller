@@ -9,7 +9,7 @@ var filename = null;
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "/uploads");
+    cb(null, "uploads/");
   },
   filename: function (req, file, cb) {
     filename = Date.now() + "-" + file.originalname;
@@ -74,7 +74,7 @@ console.log("index running");
     const collection = db.collection("uploaded");
 
     // CSV File Path
-    const csvFilePath = "/uploads" + filename;
+    const csvFilePath = "uploads/" + filename;
 
     console.log("Reading file from ", csvFilePath);
     /**
