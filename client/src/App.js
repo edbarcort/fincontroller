@@ -1,7 +1,11 @@
 import React from 'react';
 import './App.css';
 import {Component} from "react";
-import axios from "axios"
+import axios from "axios";
+import BulkUpload from './pages/bulkUpload';
+import Login from "./components/login";
+import Registry from "./components/registry";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 class App extends Component{
@@ -22,23 +26,38 @@ onChangeHandler=event=>{
 
 onClickHandler = () => {
     const data = new FormData()
-    data.append('file', this.state.selectedFile)
+    data.append('file', this.state.file)
   axios.post("http://localhost:3000/upload", data, { // receive two parameter endpoint url ,form data 
-  })}
 
-
+})
+    .then(res => { // then print response status
+      console.log(res.statusText)
+    })
+}
 
 render() {
-  return (
-    <div onSubmit={this.onFormSubmit}>
-      <h1> Bulk upload </h1>
-      <input type = "file" name = "file" onChange={this.onChangeHandler} />
-      <button onClick={
-        this.onClickHandler
-      }>
-Upload file
-      </button>
-      </div>
+return (
+//     <div onSubmit={this.onFormSubmit}>
+//       <h1> Bulk upload </h1>
+//       <input type = "file" name = "file" onChange={this.onChangeHandler} />
+//       <button onClick={
+//         this.onClickHandler
+//       }>
+// Upload file
+//       </button>
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route path='/login' component={Login} />
+            <Route path='/upload' component={BulkUpload} />
+            <Route path='/registry' component={Registry} />
+            <Route path='/' component={Login} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+
+      // </div>
+ 
   )  
 }
 }
