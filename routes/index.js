@@ -51,7 +51,7 @@ console.log("index running");
 
   // Mongodb Connection URL 
 
-  const url = "mongodb://localhost";
+  const url = process.env.MONGODB_URI || "mongodb://localhost/dbFinancial";
   console.log("Multer", req.file.filename);
   // Database Name
   const dbName = "dbFinancial";
