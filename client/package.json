@@ -1,6 +1,9 @@
 {
   "name": "first-react-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.1",
