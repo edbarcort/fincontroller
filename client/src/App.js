@@ -15,7 +15,7 @@ class App extends Component{
       file: null
     }
   }
-
+  
 
 onChangeHandler=event=>{
   this.setState({

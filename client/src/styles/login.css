@@ -68,3 +68,12 @@ body{
     -webkit-transform-origin: 100% 100%;
     -ms-transform-origin: 100% 100%;
     transform-origin: 100% 100%; }
+
+    .my-custom-scrollbar {
+      position: relative;
+      height: 200px;
+      overflow: auto;
+      }
+   .table-wrapper-scroll-y {
+      display: block;
+      }
