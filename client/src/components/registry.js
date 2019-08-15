@@ -12,19 +12,28 @@ class Registry extends Component {
     state = {
         email:'',
         password: '',
-        registry: ''
+        registry: '',
+        error: '',
     };
     onSubmit = (event) => {
         event.preventDefault();
         const user = firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
         .then((user) => {
             this.props.history.push('/login');
-
         })
-        .catch((err) => {
-            console.log(err)
+        .catch((error) => {
+            var errorMessage = error.code;
+            if(errorMessage === 'auth/weak-password'){
+               return this.setState({error: "Weak Password. Password should be at least 6 characters"})  
+            }
+            console.log(this.state.error);
+            console.log(error);
         });
-    };    
+        }
+     
+        // "auth/weak-password"  "Password should be at least 6 characters
+        // : "auth/email-already-in-use", message: "The email address is already in use by another account."}
+     
     handleChange = (event) => {
         const field = event.target.name; 
         const value = event.target.value;
@@ -32,6 +41,7 @@ class Registry extends Component {
         console.log(this.state)
         console.log('F' +field, 'V' + value);
     }
+
     render() {
   return (
    <div className="container center">
@@ -84,6 +94,7 @@ class Registry extends Component {
               <MDBModalFooter>
                 <div className="font-weight-light">
                   <p><Link to = '/login' >Login</Link></p>
+                  <p className="errorLogin">{this.state.error}</p>
                   <p></p>
                 </div>         
               </MDBModalFooter>
@@ -97,5 +108,7 @@ class Registry extends Component {
   );
 };
 }
+
+
 
 export default Registry;
