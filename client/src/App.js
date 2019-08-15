@@ -48,10 +48,10 @@ return (
       <BrowserRouter>
         <div className="App">
           <Switch>
+            <Route exact path='/' component={Login} />
             <Route path='/login' component={Login} />
             <Route path='/upload' component={BulkUpload} />
             <Route path='/registry' component={Registry} />
-            <Route path='/' component={Login} />
           </Switch>
         </div>
       </BrowserRouter>
