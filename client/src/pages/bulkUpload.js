@@ -39,7 +39,7 @@ class bulkUpload extends Component {
   onClickHandler = () => {
     const data = new FormData()
     data.append('file', this.state.file)
-    axios.post("upload/", data, { })
+    axios.post("/upload", data)
       .then(res => { // then print response status
         console.log(res.statusText)
         console.log(res)
