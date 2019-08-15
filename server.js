@@ -26,7 +26,8 @@ app.use(cors());
 app.use("/",routes);
 app.use("/api",apiRoutes);
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbFinancial");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbFinancial", { useNewUrlParser: true });
+
 // Starts our server.
 app.listen(PORT, function () {
   console.log("Server listening on: http://localhost:" + PORT);

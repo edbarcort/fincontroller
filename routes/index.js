@@ -57,7 +57,7 @@ console.log("index running");
   const dbName = "dbFinancial";
 
   // Create a new MongoClient
-  const client = new mongoClient(url, { useNewUrlParser: true });
+  const client = new mongoClient(url);
 
 
   // Use connect method to connect to the Server
