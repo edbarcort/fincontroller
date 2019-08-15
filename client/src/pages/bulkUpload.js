@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import { Component } from "react";
-import { MDBInputGroup, MDBBtn, MDBProgress } from "mdbreact";
+import { MDBInputGroup, MDBBtn} from "mdbreact";
 import axios from "axios";
 import { TablePage } from "../components/table"
 import API from "../utils/api.js"
@@ -39,9 +39,7 @@ class bulkUpload extends Component {
   onClickHandler = () => {
     const data = new FormData()
     data.append('file', this.state.file)
-    axios.post("http://localhost:3000/upload", data, { // receive two parameter endpoint url ,form data 
-
-    })
+    axios.post("https://fincontroller.herokuapp.com/upload/", data, { })
       .then(res => { // then print response status
         console.log(res.statusText)
         console.log(res)
