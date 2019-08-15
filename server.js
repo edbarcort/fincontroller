@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(cors());
 app.use("/",routes);
-app.use("/api",apiRoutes);
+//app.use("/api",apiRoutes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbFinancial");
 // Starts our server.
