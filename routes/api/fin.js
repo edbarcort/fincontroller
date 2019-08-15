@@ -4,9 +4,10 @@ const finController = require("../../controllers/dataController.js");
 router
     .route("/")
     .get(finController.findAll);
+    
 // Matches with "/api/books/:id"
-// router
-//     .route("/:id")
-//     .get(finController.findByReq)
-//     .put(finController.update)
+router
+    .route("/:sbu/:region/:period")
+    .get(finController.findOne);
+
 module.exports = router;
