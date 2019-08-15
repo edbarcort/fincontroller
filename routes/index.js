@@ -54,7 +54,12 @@ console.log("index running");
   const url = process.env.MONGODB_URI || "mongodb://localhost/dbFinancial";
   console.log("Multer", req.file.filename);
   // Database Name
-  const dbName = "dbFinancial";
+  var dbName = "";
+  if(process.env.MONGODB_URI ) {
+    dbName = "heroku_9bjr71v8";
+  }else{
+    dbName = "dbFinancial";
+  }
 
   // Create a new MongoClient
   const client = new mongoClient(url);
