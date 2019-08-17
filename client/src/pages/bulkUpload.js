@@ -6,7 +6,7 @@ import ModalPage from "../components/modal"
 import { MDBInputGroup, MDBBtn } from "mdbreact";
 import axios from "axios";
 import API from "../utils/api.js"
-import { ApiProvider } from "../api";
+import { ApiProvider, ApiSubscribe } from "../api";
 
 
 
@@ -56,7 +56,11 @@ class bulkUpload extends Component {
       })
   };
 
+ 
+    
+
   render() {
+    setTimeout(this.getInfo(),3000);  
     return (
       <div className="container">
 
@@ -94,7 +98,7 @@ class bulkUpload extends Component {
         <ApiProvider>
           <div className='container bg-light'>
             <h1> Financial Reports</h1>
-            <TablePage finData={this.state.finData} ></TablePage>
+              <TablePage finData={this.state.finData} ></TablePage>
           </div>
           <ModalPage></ModalPage>
         </ApiProvider>

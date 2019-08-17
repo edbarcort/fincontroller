@@ -3,6 +3,7 @@ import { Provider, Subscribe, Container } from "unstated";
 import serverAPI from "./utils/api"
 
 
+
 // Create a Container for our React Context. This container will
 // hold state and methods just like a react component would:
 export class ApiContainer extends Container {
@@ -14,9 +15,11 @@ export class ApiContainer extends Container {
     this.state = {
         modalSate: false,
         infoID:'',
-        inside:''
+        inside:'',
+        finData:[]
     };
   }
+  
   
   // These methods will also be avaiable anywhere we inject our
   // container context
@@ -30,12 +33,11 @@ export class ApiContainer extends Container {
   }
 
   async updateReport(body){
+
    const reqbody ={comment:body}; 
-    serverAPI.saveData(this.state.infoID,reqbody)
-    .then(res => 
-      //this.modalHide()
-     window.location.reload()
-    );
+    
+   serverAPI.saveData(this.state.infoID,reqbody)
+    .then(res =>this.modalHide());
   }
 }
 
