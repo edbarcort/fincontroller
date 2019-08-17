@@ -25,14 +25,6 @@ app.use(express.json());
 app.use(cors());
 app.use("/",routes);
 app.use("/api",apiRoutes);
-
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, routes), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dbFinancial", { useNewUrlParser: true });
 

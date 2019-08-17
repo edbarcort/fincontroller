@@ -34,7 +34,7 @@ export class ApiContainer extends Container {
     serverAPI.saveData(this.state.infoID,reqbody)
     .then(res => 
       //this.modalHide()
-      window.location.reload()
+     window.location.reload()
     );
   }
 }
