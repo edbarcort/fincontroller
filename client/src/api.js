@@ -34,7 +34,7 @@ export class ApiContainer extends Container {
     serverAPI.saveData(this.state.infoID,reqbody)
     .then(res => 
       
-      window.location.reload()
+      window.location.assign('/upload/')
     );
   }
 }
