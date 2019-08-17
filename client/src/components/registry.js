@@ -21,12 +21,15 @@ class Registry extends Component {
             this.props.history.push('/login');
         })
         .catch((error) => {
-            var errorMessage = error.code;
-            if(errorMessage === 'auth/weak-password'){
-               return this.setState({error: "Weak Password. Password should be at least 6 characters"})  
-            }
-            console.log(this.state.error);
-            console.log(error);
+          var errorMessage = error.code;
+          switch(errorMessage) {
+              case "auth/weak-password": 
+              this.setState({error: "Password should be at least 6 characters"})
+              break;
+              case "auth/email-already-in-use": 
+              this.setState({error: "Email Already in Use"})
+              break;
+          }
         });
         }
      

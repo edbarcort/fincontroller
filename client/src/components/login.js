@@ -22,12 +22,18 @@ class Login extends Component {
             this.props.history.push('/upload');
         })
         .catch((error) => {
-            var errorMessage = error.code;
-            if(errorMessage === 'auth/user-not-found'){
-               return this.setState({error: "User not found. Request Access"})
-            }
-            console.log(this.state.error);
-            console.log(error);
+          var errorMessage = error.code;
+          switch(errorMessage) {
+              case "auth/user-not-found": 
+              this.setState({error: "User not found. Request Access"})
+              break;
+              case "auth/weak-password":
+              this.setState({error: "Weak Password. Password should be at least 6 characters"})  
+              break;
+              case "auth/wrong-password":
+              this.setState({error: "Wrong Password"})
+              break;
+          }
         });
     };    
     handleChange = (event) => {
