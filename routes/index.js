@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/upload',(req,res)=>{
-  res.redirect("/upload"); 
+  res.sendFile('/index.html');
 });
 // app.post('/upload', function (req, res) {
 
