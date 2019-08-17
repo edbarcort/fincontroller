@@ -1,16 +1,25 @@
 import React from 'react';
-import { MDBDataTable, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBDataTable, MDBBtn } from 'mdbreact';
 import "../styles/login.css";
+import { ApiSubscribe } from "../api";
+
+
 export function TablePage({ finData }) {
+ 
   finData.forEach(element => {
-    element._id = <MDBBtn active color="primary" size='sm' type="button" id={element._id} value={element._id}>Add Comment</MDBBtn>;
+    const id = element._id;
+    element._id =
+    <ApiSubscribe>
+    {api => (
+      <MDBBtn active color="primary" size='sm' type="button" id={id}  onClick={ () => api.modalShow(id)}>Add Comment</MDBBtn>
+    )}
+    </ApiSubscribe>
   });
+  
   const data = {
     columns: [
       {
-        // 'label': <MDBInput label=" " type="checkbox" id="checkbox5" />,
-        // 'field': 'check',
-        // 'sort': 'asc'
+
       },
       {
         'label': 'Business Unit',
@@ -41,26 +50,18 @@ export function TablePage({ finData }) {
         'label': 'Rolling Forecast',
         'field': 'rfc',
         'sort': 'asc'
+      },
+      {
+        'label': 'Inside',
+        'field': 'commet',
+        'sort': 'asc'
       }
     ],
-    // rows: [
-    //   {
-    //     'check': <MDBInput label=" " type="checkbox" id="checkbox6" />,
-    //     'sbu': 'Adhesives',
-    //     'region': 'Americas',
-    //     'period': '2019-01',
-    //     'py': '3%',
-    //     'pl': '-2%',
-    //     'rfc': '1%'
-    //   }
-    //]
     rows: finData
   };
 
   return (
-
-
-    <MDBDataTable
+      <MDBDataTable  
       striped
       hover
       tbodyColor='white'

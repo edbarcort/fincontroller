@@ -1,10 +1,13 @@
 import React from 'react';
 import '../App.css';
 import { Component } from "react";
-import { MDBInputGroup, MDBBtn} from "mdbreact";
-import axios from "axios";
 import { TablePage } from "../components/table"
+import ModalPage from "../components/modal"
+import { MDBInputGroup, MDBBtn, MDBProgress } from "mdbreact";
+import axios from "axios";
 import API from "../utils/api.js"
+import { ApiProvider } from "../api";
+
 
 
 class bulkUpload extends Component {
@@ -13,7 +16,8 @@ class bulkUpload extends Component {
     this.state = {
       file: null,
       uploaded: false,
-      finData: []
+      finData: [],
+      progress: 0
     }
   }
 
@@ -34,24 +38,23 @@ class bulkUpload extends Component {
       file: event.target.files[0],
       loaded: 0,
     })
-  }
+  };
 
   onClickHandler = () => {
     const data = new FormData()
     data.append('file', this.state.file)
-    axios.post("/upload", data, { })
+    axios.post("/upload", data, {})
       .then(res => { // then print response status
         console.log(res.statusText)
         console.log(res)
         if (res.statusText === "OK") {
           this.setState({
             uploaded: true,
-
           })
         }
         this.getInfo();
       })
-  }
+  };
 
   render() {
     return (
@@ -59,7 +62,6 @@ class bulkUpload extends Component {
 
         <div className='container bg-light' onSubmit={this.onFormSubmit}>
           <h1> Bulk upload </h1> {this.state.uploaded ? <h1 className="text-success">Completed</h1> : " "}
-
           <MDBInputGroup
             append={
               <MDBBtn
@@ -89,11 +91,13 @@ class bulkUpload extends Component {
             containerClassName="mb-3"
           />
         </div>
-        <div className='container bg-light'>
-          <h1> Financial Reports</h1>
-          <TablePage finData={this.state.finData}></TablePage>
-        </div>
-
+        <ApiProvider>
+          <div className='container bg-light'>
+            <h1> Financial Reports</h1>
+            <TablePage finData={this.state.finData}></TablePage>
+          </div>
+          <ModalPage></ModalPage>
+        </ApiProvider>
       </div>
 
     )

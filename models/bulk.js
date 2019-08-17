@@ -7,7 +7,8 @@ const bulkschema = new Schema({
     period: String,
     pl: String,
     py: String,
-    rfc: String
+    rfc: String,
+    comment:String
 });
 const bulk = mongoose.model("uploaded", bulkschema);
 module.exports =bulk;

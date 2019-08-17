@@ -7,7 +7,7 @@ export default {
     getData2: function(id) {
         return axios.get("api/data/" + id)
     },
-    saveData: function(id) {
-        return axios.put("api/data/" + id)
+    saveData: function(id,body) {
+        return axios.post("api/data/" + id,body)
     }
 };
