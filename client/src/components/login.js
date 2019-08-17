@@ -6,23 +6,28 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import firebase from 'firebase';
 import {Link} from 'react-router-dom';
-
 // const Login = () => 
 class Login extends Component {
     state = {
         email:'',
         password: '',
-        login: ''
+        login: '',
+        error: '',
     };
     onSubmit = (event) => {
         event.preventDefault();
         const user = firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password)
+       
         .then((user) => {
             this.props.history.push('/upload');
-
         })
-        .catch((err) => {
-            console.log(err)
+        .catch((error) => {
+            var errorMessage = error.code;
+            if(errorMessage === 'auth/user-not-found'){
+               return this.setState({error: "User not found. Request Access"})
+            }
+            console.log(this.state.error);
+            console.log(error);
         });
     };    
     handleChange = (event) => {
@@ -73,18 +78,19 @@ class Login extends Component {
                 id="defaultFormPasswordEx"
                 className="form-control"
               />
-
               <div className="text-center mt-4">
                 <MDBBtn color="deep-orange" className="mb-3" type="submit">
                   Login
                 </MDBBtn>
               </div>
               </form>
-
               <MDBModalFooter>
                 <div className="font-weight-light">
+                <p className="errorLogin">{this.state.error}</p>
                   <p>Not a member? <Link to = '/registry' >Request Access</Link></p>
                   <p>Forgot Password?</p>
+                 
+               
                 </div>         
               </MDBModalFooter>
             </MDBCardBody>
@@ -97,5 +103,4 @@ class Login extends Component {
   );
 };
 }
-
 export default Login;

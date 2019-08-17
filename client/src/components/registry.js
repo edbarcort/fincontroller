@@ -6,25 +6,33 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import firebase from 'firebase';
 import {Link} from 'react-router-dom';
-
 // const Login = () => 
 class Registry extends Component {
     state = {
         email:'',
         password: '',
-        registry: ''
+        registry: '',
+        error: '',
     };
     onSubmit = (event) => {
         event.preventDefault();
         const user = firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
         .then((user) => {
             this.props.history.push('/login');
-
         })
-        .catch((err) => {
-            console.log(err)
+        .catch((error) => {
+            var errorMessage = error.code;
+            if(errorMessage === 'auth/weak-password'){
+               return this.setState({error: "Weak Password. Password should be at least 6 characters"})  
+            }
+            console.log(this.state.error);
+            console.log(error);
         });
-    };    
+        }
+     
+        // "auth/weak-password"  "Password should be at least 6 characters
+        // : "auth/email-already-in-use", message: "The email address is already in use by another account."}
+     
     handleChange = (event) => {
         const field = event.target.name; 
         const value = event.target.value;
@@ -73,17 +81,16 @@ class Registry extends Component {
                 id="defaultFormPasswordEx"
                 className="form-control"
               />
-
               <div className="text-center mt-4">
                 <MDBBtn color="deep-orange" className="mb-3" type="submit">
                   Submit
                 </MDBBtn>
               </div>
               </form>
-
               <MDBModalFooter>
                 <div className="font-weight-light">
                   <p><Link to = '/login' >Login</Link></p>
+                  <p className="errorLogin">{this.state.error}</p>
                   <p></p>
                 </div>         
               </MDBModalFooter>
@@ -97,5 +104,4 @@ class Registry extends Component {
   );
 };
 }
-
 export default Registry;

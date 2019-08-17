@@ -33,8 +33,8 @@ export class ApiContainer extends Container {
    const reqbody ={comment:body}; 
     serverAPI.saveData(this.state.infoID,reqbody)
     .then(res => 
-      
-      window.location.assign('/upload/')
+      //this.modalHide()
+      window.location.reload()
     );
   }
 }

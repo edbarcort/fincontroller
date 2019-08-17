@@ -3,7 +3,7 @@ import '../App.css';
 import { Component } from "react";
 import { TablePage } from "../components/table"
 import ModalPage from "../components/modal"
-import { MDBInputGroup, MDBBtn, MDBProgress } from "mdbreact";
+import { MDBInputGroup, MDBBtn } from "mdbreact";
 import axios from "axios";
 import API from "../utils/api.js"
 import { ApiProvider } from "../api";
@@ -60,7 +60,7 @@ class bulkUpload extends Component {
     return (
       <div className="container">
 
-        <div className='container bg-light' onSubmit={this.onFormSubmit}>
+        <div className='container bg-light'>
           <h1> Bulk upload </h1> {this.state.uploaded ? <h1 className="text-success">Completed</h1> : " "}
           <MDBInputGroup
             append={
@@ -94,7 +94,7 @@ class bulkUpload extends Component {
         <ApiProvider>
           <div className='container bg-light'>
             <h1> Financial Reports</h1>
-            <TablePage finData={this.state.finData}></TablePage>
+            <TablePage finData={this.state.finData} ></TablePage>
           </div>
           <ModalPage></ModalPage>
         </ApiProvider>

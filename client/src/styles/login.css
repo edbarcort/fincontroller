@@ -77,3 +77,8 @@ body{
    .table-wrapper-scroll-y {
       display: block;
       }
+
+      .errorLogin{
+        color: red;
+        font-size: 18px;
+      }
